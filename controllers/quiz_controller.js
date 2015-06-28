@@ -8,6 +8,6 @@ exports.answer =function (req, res) {
   if (req.query.respuesta.toUpperCase()  === "ROMA" ){
     res.render("quizes/answer",{Respuesta: "Correcto"});
   } else{
-    res.render("author",{Respuesta: "Incorrecto"});
+    res.render("quizes/answer",{Respuesta: "Incorrecto"});
   }
 };
