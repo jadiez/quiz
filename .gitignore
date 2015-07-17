@@ -1,3 +1,11 @@
+#Fichero de Entorno
+.env
+
+node_modules
+
+# Base de datos Sqlite
+*.sqlite
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -15,9 +23,6 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-
-# Base de datos Sqlite
-*.sqlite
 
 # Windows shortcuts
 *.lnk
