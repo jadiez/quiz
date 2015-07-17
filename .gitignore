@@ -3,6 +3,7 @@ Thumbs.db
 ehthumbs.db
 npm-debug.log
 
+
 # Folder config file
 Desktop.ini
 
@@ -14,6 +15,9 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
+# Base de datos Sqlite
+*.sqlite
 
 # Windows shortcuts
 *.lnk
