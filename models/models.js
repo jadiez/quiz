@@ -1,17 +1,29 @@
 // Define el modelo
 
 var path = require("path");
+
 //Postgre
 //SQLite
-var url=process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/); 
-var DB_name = (url[6]|null);
-var user    = (url[2]|null);
-var pwd     = (url[3]|null);
-var protocol= (url[1]|null);
-var dialect = (url[1]|null);
-var port    = (url[5]|null);
-var host    = (url[4]|null);
-var storage = process.env.DATABASE_STORAGE;
+
+
+
+var url=(process.env.DATABASE_URL||"sqlite://:@:/").match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/); 
+console.log(url);
+
+var DB_name = (url[6] || null);
+var user    = (url[2] || null);
+var pwd     = (url[3] || null);
+var protocol= (url[1] || null);
+var dialect = (url[1] || null);
+var port    = (url[5] || null);
+var host    = (url[4] || null);
+var storage = (process.env.DATABASE_STORAGE||"quiz.sqlite");
+
+console.log ("DB_name =" + DB_name);
+console.log ("user =" + user);
+console.log ("pwd =" + pwd);
+console.log ("protocol=" + protocol);
+console.log ("storage =" + storage);
 
 //Cargar modelo ORM
 var Sequelize = require("sequelize");
