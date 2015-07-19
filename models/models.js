@@ -8,7 +8,6 @@ var path = require("path");
 
 
 var url=(process.env.DATABASE_URL||"sqlite://:@:/").match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/); 
-console.log(url);
 
 var DB_name = (url[6] || null);
 var user    = (url[2] || null);
@@ -19,11 +18,11 @@ var port    = (url[5] || null);
 var host    = (url[4] || null);
 var storage = (process.env.DATABASE_STORAGE||"quiz.sqlite");
 
-console.log ("DB_name =" + DB_name);
-console.log ("user =" + user);
-console.log ("pwd =" + pwd);
-console.log ("protocol=" + protocol);
-console.log ("storage =" + storage);
+//console.log ("DB_name =" + DB_name);
+//console.log ("user =" + user);
+//console.log ("pwd =" + pwd);
+//console.log ("protocol=" + protocol);
+//console.log ("storage =" + storage);
 
 //Cargar modelo ORM
 var Sequelize = require("sequelize");
