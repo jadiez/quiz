@@ -18,11 +18,6 @@ var port    = (url[5] || null);
 var host    = (url[4] || null);
 var storage = (process.env.DATABASE_STORAGE||"quiz.sqlite");
 
-//console.log ("DB_name =" + DB_name);
-//console.log ("user =" + user);
-//console.log ("pwd =" + pwd);
-//console.log ("protocol=" + protocol);
-//console.log ("storage =" + storage);
 
 //Cargar modelo ORM
 var Sequelize = require("sequelize");
@@ -51,6 +46,10 @@ Quiz.sync().then(function(){
 	//Comprobamos si existen registros
 	Quiz.count().then(function(count){
 		if(count===0){
+			Quiz.create({
+				pregunta:"Capital de Portugal",
+				respuesta:"Lisboa"
+			});
 			Quiz.create({
 				pregunta:"Capital de Italia",
 				respuesta:"Roma"
