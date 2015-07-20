@@ -1,2 +1,7 @@
 <p><font  color=<%= color %>><h1><%= Respuesta %></h1></font></p>
-<p><a href="/quizes/<%= quiz.id%>">Volver</a></p>
+<p>
+   <% if(Respuesta==="Incorrecto"){ %>
+	<a href="/quizes/<%= quiz.id%>">Volver a Intentarlo</a>
+   <% } %>
+	<a href="/quizes">Otra pregunta</a>
+</p>

@@ -8,14 +8,16 @@ router.get('/', function(req, res) {
   res.render('index');
 });
 
+//Autoload de comandos con :quizId
+router.param('quizId', quizController.load);
+
 // GET página de Creditos
 router.get('/author', function(req, res) {
   res.render('author');
 });
-
-router.get("/quizes/",						quizController.index);
+router.get("/quizes/",				quizController.index);
 router.get("/quizes/:quizId", 		quizController.show);
-router.get("/quizes/:quizId/answer", 	quizController.answer);
+router.get("/quizes/:quizId/answer",quizController.answer);
 
 module.exports = router;
 

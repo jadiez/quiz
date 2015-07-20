@@ -6,7 +6,10 @@ body                 { font: 16px Georgia, serif; }
 #page-wrap > .main   { padding: 1%;
 	                   margin-bottom: 1px; color: black;}
 
-section > div        { padding: 20px; }
+section > div        { padding: 20px; text-align: center;}
+p > a                { padding: 10px; }
 header, nav, section { background: #eee; text-align: center;}
 footer               { background: #eee; text-align: center;}
 footer span , nav span     { margin: 0px 20px 0px 0px;}
+table{width: 100%}
+
