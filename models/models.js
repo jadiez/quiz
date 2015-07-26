@@ -51,6 +51,10 @@ Quiz.sync().then(function(){
 				respuesta:"Lisboa"
 			});
 			Quiz.create({
+				pregunta:"Capital de Madrid",
+				respuesta:"Madrid"
+			});
+			Quiz.create({
 				pregunta:"Capital de Italia",
 				respuesta:"Roma"
 			}).then(function(){
