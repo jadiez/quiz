@@ -19,7 +19,6 @@ exports.load = function(req,res,next,quizId){
 
 
 exports.index = function(req,res){
-  console.log(req.query.search.replace(/\+/g,'%'));
   models.Quiz.findAll({where: {pregunta: {$like: "%"+ req.query.search.replace(/\s/g,'%') + "%"}}}).then(function(quizes){
   	res.render('quizes/index', { quizes: quizes});
   }).catch(function(error){next(error);});
