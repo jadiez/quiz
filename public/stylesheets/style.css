@@ -12,4 +12,6 @@ header, nav, section { background: #eee; text-align: center;}
 footer               { background: #eee; text-align: center;}
 footer span , nav span     { margin: 0px 20px 0px 0px;}
 table{width: 100%}
+nav span { margin: 0px, 10px, 0px, 0px;}
+#ErrorMsgs { color: red; font-size: smaler}
 

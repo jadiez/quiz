@@ -5,7 +5,7 @@ var quizController = require('../controllers/quiz_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index');
+  res.render('index',{errors:[]});
 });
 
 //Autoload de comandos con :quizId
@@ -13,11 +13,13 @@ router.param('quizId', quizController.load);
 
 // GET página de Creditos
 router.get('/author', function(req, res) {
-  res.render('author');
+  res.render('author',{errors:[]});
 });
-router.get("/quizes/",				quizController.index);
-router.get("/quizes/:quizId", 		quizController.show);
-router.get("/quizes/:quizId/answer",quizController.answer);
+router.get("/quizes",				      quizController.index);
+router.get("/quizes/:quizId(\\d+)", 	  quizController.show);
+router.get("/quizes/:quizId(\\d+)/answer",quizController.answer);
+router.get("/quizes/new",			      quizController.new);
+router.post("/quizes/create",		      quizController.create);
 
 module.exports = router;
 

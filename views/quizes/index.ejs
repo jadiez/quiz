@@ -1,7 +1,3 @@
-
-
-
-
 <table>
 	<th>
 		<form action="/quizes"+search method="get">
@@ -14,5 +10,9 @@
 <tr><td><a href="quizes/<%=quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
 
 <% } %>
+	<tr><th>
+		<a href="/quizes/new"><button type="button">Crear Pregunta</button></a>
+ 	</th></tr>
+
 </table>
-  
+ 
