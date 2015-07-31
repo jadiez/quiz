@@ -60,3 +60,38 @@ exports.answer =function(req, res){
 	    res.render("quizes/answer",{quiz: req.quiz, errors: [], Respuesta: "Incorrecto", color: "red"});
 	};
 };
+
+exports.editar =function(req, res){
+	var quiz = req.quiz;
+	res.render('quizes/editar',{quiz: quiz, errors: []});
+};
+
+exports.update= function(req,res){
+	req.quiz.pregunta=req.body.quiz.pregunta;
+	req.quiz.respuesta=req.body.quiz.respuesta;
+
+	//GActualiza en DB
+	req.quiz
+		.validate()
+		.then(function(err){
+			if(err){
+				res.render('quizes/editar',{quiz: req.quiz, errors: err.errors});
+			} else {
+				req.quiz
+					.save({fields: ["pregunta", "respuesta"]})
+					.then(function(){res.redirect('/quizes?search=')})
+			}
+		});
+};
+
+exports.borrar= function(req,res){
+
+	//Borra registro
+	console.log("Borrando" + req.quiz);
+	req.quiz
+		.destroy()
+		.then(function(){
+				res.redirect('/quizes?search=');
+			}).catch(function(error){next(error)});
+
+};
