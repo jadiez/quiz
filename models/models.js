@@ -5,8 +5,6 @@ var path = require("path");
 //Postgre
 //SQLite
 
-
-
 var url=(process.env.DATABASE_URL||"sqlite://:@:/").match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/); 
 
 var DB_name = (url[6] || null);
@@ -38,9 +36,27 @@ var sequelize = new Sequelize(DB_name, user, pwd,
 var quiz_path = path.join(__dirname,"quiz");
 var Quiz = sequelize.import(quiz_path);
 
+// Importar la definición de la tabla Comments en quiz.sqlite
+var comment_path = path.join(__dirname,"comment");
+var Comment = sequelize.import(comment_path);
 
+//Definimos relaciones entre tablas
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
 
 exports.Quiz = Quiz;
+exports.Comment = Comment;
+
+Comment.sync().then(function(){
+	//Comprobamos si existen registros
+	Comment.count().then(function(count){
+		if(count===0){
+			console.log("No hay comentarios");
+		}else{
+			console.log(count + " comentarios existentes");
+		}
+	});
+});
 
 Quiz.sync().then(function(){
 	//Comprobamos si existen registros
