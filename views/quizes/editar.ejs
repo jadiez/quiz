@@ -1,22 +1,8 @@
 Editar Pregunta: <p>
 <form method="post" action="/quizes/<%=quiz.id%>?_method=put">
-	<label for="tema" class="rem">Tema:</label>
-	<select name="quiz[tema]" id="tema">
-		<%
-	       for( var i in temas ) {
-                var text = temas[ i ];
-                var selected = "";
-                if ( quiz.tema === text ) {
-                      selected = "selected";
-                }
-        %>
-        <option value="<%= text %>" <%= selected %>><%= text %></option>
-        <%
-            }
-        %>
 
-	</select><p>
-	<label for="preg" class="rem">Pregunta:</label>
+	<%include _form.ejs %>
+	
 	<input type="text" id="preg" name="quiz[pregunta]" value="<%= quiz.pregunta %>" /> <p>
 	<label for="resp" class="rem">Respuesta:</label>
 	<input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>" /> <p>

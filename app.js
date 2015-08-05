@@ -20,7 +20,6 @@ app.set('views', path.join(__dirname, 'views'));  //Define el directorio de vist
 app.set('view engine', 'ejs');
 
 // Instalacion de middlewares de los paquetes instalados
-// uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -39,15 +38,44 @@ app.use(partials());
 //Helpers dinamicos
 app.use(function(req,res,next){
   //Guarda path en session.redir para despues del logout
-  console.log("out:" + req.path);
   if(!req.path.match(/\/login|\/logout/)){
     req.session.redir = req.path;
-    console.log("in :"+ req.path);
-  }
-  // Hacer visible req.session en las vistas
+  };
+  
+  // Crea campo session.refreshTime
+  req.session.refreshTime = new Date().getTime();
+
+  // Hacer visible req.session en las vistas guardándola en una varible local
   res.locals.session = req.session;
   next();
-})
+
+});
+
+// MW para comprobar inactividad de inicio de sesion
+app.use(function(req,res,next){
+  var tiempoMaxInactividad = 10*1000; // 2 minutos en milisegundos
+
+  //Comprobamos si hay un usuario con sesión iniciada 
+  if(req.session.user){
+
+    //Comprobamos el tiempo de inactividad
+    if(req.session.refreshTime-req.session.user.loginTime >= tiempoMaxInactividad){
+      // Destrimos la sesion damos un error 
+      //req.session.destroy();
+
+      delete req.session.user;
+      var err = new Error("Tiempo de inactividad superado");
+      next(err);
+      //res.redirect(req.session.redir.toString());
+
+      //res.redirect("/logout");
+      
+
+    }
+  } 
+  next();
+
+});
 
 //Instalamos middlewares de los enrutadores propios
 app.use('/', routes);
