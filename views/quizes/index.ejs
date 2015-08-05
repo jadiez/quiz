@@ -7,12 +7,15 @@
 		</form>
 	</th>
 	<th colspan="2">
+	  <% if (session.user) { %>
 		<a href="/quizes/new"><button type="button">Crear Pregunta</button></a>
+	  <% } %>
 	</th>
 </tr>
 <% var i; for(i=0; i<quizes.length; i++) { %>
 <tr>
 	<td><a href="quizes/<%=quizes[i].id %>"><%= quizes[i].pregunta %>  (<%= quizes[i].tema %>)</a></td>
+	<% if (session.user) { %>
 	<td><a href="quizes/<%=quizes[i].id %>/editar"><button type="button">Editar</button>
 	<td>
 	<form method="post" action="/quizes/<%=quizes[i].id%>?_method=delete">
@@ -20,6 +23,7 @@
 			Borrar
 		</button>
 	</form>
+	<% } %>
 </tr>
 
 <% } %>

@@ -16,3 +16,4 @@ nav span { margin: 0px, 10px, 0px, 0px;}
 table {border-collapse: collapse;}
 table, td, th {border: 1px solid black;}
 table  th {background: #999;}
+.right {float: right;}
