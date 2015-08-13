@@ -26,11 +26,13 @@ exports.create= function(req,res){
 
 		}
 	// Si no hay error creamos req.session.user y guardamos campos id y username
-	// Y el valor de la hora de validacion del usuario
+	// Y el valor de la hora de actividad del usuario
 	// La sesión se define por la existencia de: req.session.user
 
-	req.session.user= {id: user.id, username: user.username, loginTime : new Date().getTime()};
+	req.session.user = {id: user.id, username: user.username, refreshTime : (new Date()).getTime()};
 	res.redirect(req.session.redir.toString()); // Redirecciona al path anterior al login
+
+	console.log(req.session.user);
 
 	})
 };	

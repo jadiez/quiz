@@ -42,9 +42,6 @@ app.use(function(req,res,next){
     req.session.redir = req.path;
   };
   
-  // Crea campo session.refreshTime
-  req.session.refreshTime = new Date().getTime();
-
   // Hacer visible req.session en las vistas guardándola en una varible local
   res.locals.session = req.session;
   next();
@@ -53,25 +50,21 @@ app.use(function(req,res,next){
 
 // MW para comprobar inactividad de inicio de sesion
 app.use(function(req,res,next){
-  var tiempoMaxInactividad = 10*1000; // 2 minutos en milisegundos
 
+  var tiempoMaxInactividad = 20*1000; // Probamos con 20 segundos para mo esperar mucho
+  var horaActual = new Date().getTime();
+ 
   //Comprobamos si hay un usuario con sesión iniciada 
   if(req.session.user){
-
     //Comprobamos el tiempo de inactividad
-    if(req.session.refreshTime-req.session.user.loginTime >= tiempoMaxInactividad){
+    if(horaActual - req.session.user.refreshTime >= tiempoMaxInactividad){
       // Destrimos la sesion damos un error 
-      //req.session.destroy();
-
       delete req.session.user;
       var err = new Error("Tiempo de inactividad superado");
-      next(err);
-      //res.redirect(req.session.redir.toString());
-
-      //res.redirect("/logout");
-      
-
-    }
+      next(err);  
+    } else {   //Hay actividad
+      req.session.user.refreshTime  = horaActual;  //Actualizamos la fecha ultima actividad
+    }  
   } 
   next();
 
