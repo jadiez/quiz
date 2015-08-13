@@ -4,7 +4,7 @@ var router  = express.Router();
 var quizController    = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
-var staticsController = require('../controllers/statics_controller');
+var staticsController = require('../controllers/estadisticas_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {
